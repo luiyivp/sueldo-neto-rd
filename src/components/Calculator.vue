@@ -7,17 +7,17 @@
     >
       Calculadora de Sueldo Neto
     </h5>
-    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+    <p class="text-justify mb-3 font-normal text-gray-700 dark:text-gray-400">
       Utiliza esta calculadora para conocer cual es tu sueldo neto mensual
-      después de las retenciones de ley de la República Dominincana
+      después de descontar las retenciones de ley de la República Dominicana.
     </p>
     <p
-      class="mb-3 text-sm pb-2 font-extralight text-gray-500 dark:text-gray-400"
+      class="mb-3 text-sm pb-2 font-extralight text-gray-600 dark:text-gray-400"
     >
       Los campos obligatorios son aquellos que tiene un asterisco (*) en el
       título
     </p>
-    <form class="max-w-sm mx-auto">
+    <form class="max-w-sm mx-auto" onsubmit="return false">
       <div class="mb-5">
         <label
           for="salary"
@@ -42,7 +42,7 @@
       </div>
 
       <button
-        type="button"
+        type="summit"
         @click="calculate()"
         class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-medium w-full sm:w-auto px-5 py-3 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
       >
@@ -50,9 +50,9 @@
       </button>
     </form>
     <h5
-      class="mb-2 text-xl pt-6 font-medium tracking-tight text-gray-900 dark:text-white"
+      class="mb-2 text-xl pt-6 text-center font-medium tracking-tight text-gray-900 dark:text-white"
     >
-      Resultado del calculo de tu Sueldo
+      Resultado del cálculo de tu Sueldo
     </h5>
     <div class="relative overflow-x-auto">
       <table
@@ -66,7 +66,7 @@
             >
               Sueldo Bruto:
             </th>
-            <td class="py-2">{{ salaryValue }}</td>
+            <td class="py-2 text-right">{{ salaryValue }}</td>
           </tr>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <th
@@ -75,7 +75,7 @@
             >
               SFS (3.04%)
             </th>
-            <td class="py-2">{{ sfsValue }}</td>
+            <td class="py-2 text-right">{{ sfsValue }}</td>
           </tr>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <th
@@ -84,7 +84,7 @@
             >
               AFP (2.87%)
             </th>
-            <td class="py-2">{{ afpValue }}</td>
+            <td class="py-2 text-right">{{ afpValue }}</td>
           </tr>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <th
@@ -93,7 +93,7 @@
             >
               Impuesto Sobre la Renta:
             </th>
-            <td class="py-2">{{ isrValue }}</td>
+            <td class="py-2 text-right">{{ isrValue }}</td>
           </tr>
           <tr class="bg-white dark:bg-gray-800">
             <th
@@ -102,7 +102,7 @@
             >
               Sueldo Neto:
             </th>
-            <td class="py-2 font-bold text-indigo-700">
+            <td class="py-2 font-bold text-indigo-700 text-right">
               {{ netIncomeValue }}
             </td>
           </tr>
@@ -110,9 +110,13 @@
       </table>
     </div>
     <p
-      class="mb-2 text-xs pb-2 mt-2 font-extralight text-gray-400 dark:text-gray-400"
+      class="mb-2 text-xs pb-2 mt-2 text-justify font-extralight text-gray-500 dark:text-gray-400"
     >
-      * Tener en cuenta que esta calculadora de salario neto considera únicamente las prestaciones sociales mínimas establecidas por la ley de la República Dominicana. Los resultados obtenidos en este ejercicio son con fines informativos y es responsabilidad del usuario hacer un uso adecuado y diligente de la información proporcionada.
+      * Tener en cuenta que esta calculadora de salario neto considera
+      únicamente las prestaciones sociales mínimas establecidas por la ley de la
+      República Dominicana. Los resultados obtenidos en este ejercicio son con
+      fines informativos y es responsabilidad del usuario hacer un uso adecuado
+      y diligente de la información proporcionada.
     </p>
     <a
       href="https://github.com/luiyivp/sueldo-neto-rd"
@@ -145,16 +149,18 @@ export default {
   }),
   methods: {
     calculate() {
-      this.sfs = this.salary * 0.0304;
-      this.afp = this.salary * 0.0287;
-      this.isr = this.calculateIncomeTax(this.salary);
-      this.netIncome = this.salary - this.sfs - this.afp - this.isr;
+      if (this.salary) {
+        this.sfs = this.salary * 0.0304;
+        this.afp = this.salary * 0.0287;
+        this.isr = this.calculateIncomeTax(this.salary);
+        this.netIncome = this.salary - this.sfs - this.afp - this.isr;
 
-      this.salaryValue = this.formatCurrency(this.salary);
-      this.sfsValue = this.formatCurrency(this.sfs);
-      this.afpValue = this.formatCurrency(this.afp);
-      this.isrValue = this.formatCurrency(this.isr);
-      this.netIncomeValue = this.formatCurrency(this.netIncome);
+        this.salaryValue = this.formatCurrency(this.salary);
+        this.sfsValue = this.formatCurrency(this.sfs);
+        this.afpValue = this.formatCurrency(this.afp);
+        this.isrValue = this.formatCurrency(this.isr);
+        this.netIncomeValue = this.formatCurrency(this.netIncome);
+      }
     },
     calculateIncomeTax(salary) {
       let annualSalary = salary * 12;
