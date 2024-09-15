@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  deploy_live_website:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +28,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-        
+
+      - name: Build App dependencies
+        run: pnpm run build
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
