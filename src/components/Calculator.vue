@@ -2,15 +2,15 @@
   <div
     class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
   >
-    <h5
+    <h1
       class="mb-2 text-2xl pb-3 font-bold tracking-tight text-gray-900 dark:text-white"
     >
       Calculadora de Sueldo Neto
-    </h5>
-    <p class="text-justify mb-3 font-normal text-gray-700 dark:text-gray-400">
+    </h1>
+    <h2 class="text-justify mb-3 font-normal text-gray-700 dark:text-gray-400">
       Utiliza esta calculadora para conocer cual es tu sueldo neto mensual
       después de descontar las retenciones de ley de la República Dominicana.
-    </p>
+    </h2>
     <p
       class="mb-3 text-sm pb-2 font-extralight text-gray-600 dark:text-gray-400"
     >
